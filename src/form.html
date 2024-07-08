@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> Block Vaccinator </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@0.20.6/dist/web3.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <style>
+    .card-body {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+
+    <div class="hero_bg_box">
+      <div class="bg_img_box">
+        <img src="images/hero-bg.png" alt="">
+      </div>
+    </div>
+
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              Block Vaccinator
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="form.html"> Get Vaccinated<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="vaccines.html">Our Vaccines</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="users.html">Users</a>
+              </li>
+              <li class="nav-item card p-1" style="overflow-x: hidden; color: white; background-color: rgb(0, 85, 255);">
+                <span id="metamask" ></span>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- about section -->
+
+  <div class="container-fluid p-5">
+    <div class="heading_container heading_center">
+      <h2>
+        Complete the <span>Form</span> to Receive Certificate
+      </h2>
+    </div>
+    <div class="row pt-5">
+      <main role="main" class="d-flex justify-content-center">
+        <div id="loader" class="text-center">
+          <p class="text-center">Loading...</p>
+        </div>
+        <div id="content">
+          <form style="display: none;">
+            <div class="form-group">
+              <label for="locationTemplate"><strong>Select location</strong></label>
+              <select class="form-control" id="locationDropdownList" required>
+                <option class="selectLocationTemplate" disabled>Location goes here...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="vaccineTemplate"><strong>Select vaccine</strong></label>
+              <select id="vaccineDropdownList" class="form-control" id="sel1" required>
+                <option class="selectVaccineTemplate" disabled>Vaccine goes here...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="temperature"><strong>Temperature</strong></label>
+              <input class="form-control" id="temp" placeholder="e.g. 2°C" required type="number">
+            </div>
+
+              <label style="display: none" for="temperature"><strong>Temperature</strong></label>
+              <input style="display: none"class="form-control" id="temp" placeholder="e.g. 2°C" required>
+
+            <div class="form-group">
+              <label for="nme"><strong>Name</strong></label>
+              <input class="form-control" id="nme" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+              <label for="add"><strong>Aadhaar Card Number</strong></label>
+              <input class="form-control" id="add" placeholder="Enter Aadhaar Card Number" required maxlength="12">
+            </div> 
+            <button type="submit" class="btn btn-primary" onclick="App.receiveVaccine()">Receive</button>  
+          </form>
+          <span id ="fin-hash"></span>
+        </div>
+      </main>
+    </div>
+    <div class="row">
+      <main role="main" class="d-flex justify-content-center">
+          <div id="vaccineList" class="card-columns">
+            <div class="vaccineTemplate card" style="width: 22rem; display: none; background-color:rgb(63, 62, 62) ;">
+              <div class="card-body bg-[#007bff]">
+                <h3 class="name card-title">Vaccine name goes here...</h3>
+              </div>
+              <ul class="list-group list-group-mine list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">Barcode<span class="barcode badge badge-primary badge-pill">Barcode goes here...</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Manufacturer<span class="manufacturer badge badge-primary badge-pill">Manufacturer goes here...</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Location<span class="location badge badge-primary badge-pill">Location goes here...</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Temperature<span class="temp badge badge-primary badge-pill">Temperature goes here...</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="row">
+      <main role="main" class="d-flex justify-content-center p-5">
+          <div id="certList" class="card-columns">
+          
+            <div class="certTemplate card" style="width: 22rem; display: none; background-color:rgb(63, 62, 62) ">
+              <div class="card-body">
+                <h3 class=" card-title"><button class="rounded" type="button">Get your Certificate</button></h3>
+              </div>
+              <ul class="list-group list-group-mine list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">Name<span class="name2 badge badge-primary badge-pill">Barcode goes here...</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Aadhar<span class="aadhar badge badge-primary badge-pill">Manufacturer goes here...</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Vaccine<span class="vaccinee badge badge-primary badge-pill">Manufacturer goes here...</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">Timestamp<span class="timestamp badge badge-primary badge-pill">Location goes here...</span></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- custom js -->
+  <script type="text/javascript" src="js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
+              <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+
+
+  <script src="filesaver.js"></script>
+  <script src="cert.js"></script>
+  <script src="app.js"></script>
+  <script>
+    function validateForm() {
+      var locationDropdownList = document.getElementById("locationDropdownList");
+      var vaccineDropdownList = document.getElementById("vaccineDropdownList");
+      var temp = document.getElementById("temp");
+      var nme = document.getElementById("nme");
+      var add = document.getElementById("add");
+    
+      // Check if any field is empty
+      if (locationDropdownList.value === "" || vaccineDropdownList.value === "" || temp.value === "" || nme.value === "" || add.value === "") {
+        alert("Please fill in all fields.");
+        return false;
+      }
+    
+      // Check if name contains only alphabets
+      var nameRegex = /^[a-zA-Z\s]*$/;
+      if (!nameRegex.test(nme.value)) {
+        alert("Name should contain alphabets only.");
+        return false;
+      }
+
+      // Check if temperature is numeric
+      if (isNaN(temp.value)) {
+        alert("Temperature should be a numeric value.");
+        return false;
+      }
+    
+      // Aadhaar Card Number validation using regex
+      var aadhaarRegex = /^\d{12}$/;
+      if (!aadhaarRegex.test(add.value)) {
+        alert("Please enter a valid Aadhaar Card Number (12 digits).");
+        return false;
+      }
+    
+      // If all validations pass, return true
+      return true;
+    }
+    
+    document.getElementById("formId").onsubmit = function() {
+      return validateForm();
+    };
+    </script>
+    
+
+</body>
+
+</html>

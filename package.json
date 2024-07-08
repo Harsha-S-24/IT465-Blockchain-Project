@@ -1,0 +1,33 @@
+{
+    "name": "mindbenders-teamname-vaccine-block",
+    "version": "1.0.0",
+    "description": "Covid 19 Vaccination Network Supervisor",
+    "main": "truffle-config.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "dev": "lite-server",
+        "test": "echo \"Error: no test specified\" && sexit 1"
+    },
+    "author": "Yashashwini Dixit, Gyanadipta Mohanty",
+    "license": "Closed Source",
+    "devDependencies": {
+        "autoprefixer": "^10.4.19",
+        "bootstrap": "^4.4.1",
+        "chai": "^4.1.2",
+        "chai-as-promised": "^7.1.1",
+        "chai-bignumber": "^2.0.2",
+        "diff": ">=3.5.0",
+        "lite-server": "^2.3.0",
+        "nodemon": "^1.17.3",
+        "postcss": "^8.4.38",
+        "tailwindcss": "^3.4.4",
+        "truffle": "5.0.2",
+        "truffle-contract": "3.0.6"
+    },
+    "dependencies": {
+        "fs": "*",
+        "web3": "^0.20.6"
+    }
+}
